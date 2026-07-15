@@ -27,7 +27,11 @@ for i in range(4, 15):
     message = f"hello rabbitmq!!!---{i}"
     channel.basic_publish(exchange='',
                       routing_key='hello',
-                      body=message)
+                      body=message,
+                        properties=pika.BasicProperties(
+                            delivery_mode=2,  # 메시지를 디스크에 저장(Persistent 모드)
+                        )
+                      )
 
 print(" [x] Sent 'Hello RabbitMQ!'")
 
